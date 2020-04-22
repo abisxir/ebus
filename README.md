@@ -1,4 +1,4 @@
-#ebus
+# ebus
 
 **ebus** is a minimalistic event bus for python. It does not need any 
 initialization or sequence for register or raise events. 
@@ -11,7 +11,7 @@ emits this signal.
 if you want to handle the events correctly, you should register you handlers
 before you raise the event.
 
-##Installation
+## Installation
 
 The easy way to install package is to use pip:
 
@@ -27,7 +27,7 @@ cd ebus
 sudo python setup.py install
 ```
 
-##Usage
+## Usage
 
 To simple way is just like this, define your event, register them using handle decorator 
 and emit your events when it is required:
