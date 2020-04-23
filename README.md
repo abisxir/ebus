@@ -29,7 +29,7 @@ sudo python setup.py install
 
 ## Usage
 
-To simple way is just like this, define your event, register them using handle decorator 
+The simple way is just like this, define your event, register them using handle decorator 
 and emit your events when it is required:
 
 ```python
@@ -46,7 +46,7 @@ async def handle_my_event(e: MyEvent):
     print(e.message)
 
 # When this call, all registered handlers will run
-ebus.emit(MyEvent('My async event happened.'))
+await ebus.emit_async(MyEvent('My async event happened.'))
 ```
 
 If you like to handle it in synchronous way, **ebus** will take care of that also: 
@@ -93,7 +93,7 @@ ebus.emit(MyEvent('My event happened.'))
 You can also use **register_handler** to register event handlers:
 
 ```python
-async def handle_my_event(e: MyEvent):
+def handle_my_event(e: MyEvent):
     print(e.message)
 
 # This will register the event handler.
@@ -106,7 +106,7 @@ ebus.emit(MyEvent('Test adding handler'))
 Also **ebus** prevents add a handler twice, it just ignores the second one.
 
 ```python
-async def handle_my_event(e: MyEvent):
+def handle_my_event(e: MyEvent):
     print(e.message)
 
 # The first one registers correctly

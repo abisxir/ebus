@@ -1,4 +1,4 @@
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'Abi Mohammadi'
 
 import asyncio
@@ -57,7 +57,7 @@ def __run_handler(ctx, event, handler, pass_context_as_args, pass_context_as_kwa
     else:
         return handler(event)
 
-async def __run_slots(slots, event):
+async def __run_slots_async(slots, event):
     ctx = EventContext()
     for slot in slots:
         if ctx.keep_going:
@@ -69,12 +69,26 @@ async def __run_slots(slots, event):
         else:
             break
 
+def __run_slots(slots, event):
+    ctx = EventContext()
+    for slot in slots:
+        if ctx.keep_going:
+            handler, pass_context_as_args, pass_context_as_kwargs, run_async, = slot
+            __run_handler(ctx, event, handler, pass_context_as_args, pass_context_as_kwargs)
+        else:
+            break
 
 def emit(event):
     event_type = type(event)
     slots = __handlers.get(event_type)
     if slots is not None and len(slots) > 0:
-        asyncio.run(__run_slots(slots, event))
+        __run_slots(slots, event)
+
+async def emit_async(event):
+    event_type = type(event)
+    slots = __handlers.get(event_type)
+    if slots is not None and len(slots) > 0:
+        await __run_slots_async(slots, event)
 
 
 def handle(event_type, **kwargs): 
