@@ -29,8 +29,8 @@ setup(
     long_description=long_description,
     author='Abi',
     author_email='abi@singiro.com',
-    url='https://github.com/ebus',
-    download_url='https://github.com/ebus/0.1.0.tar.gz',
+    url='https://github.com/abisxir/ebus',
+    download_url='https://github.com/abisxir/ebus/0.1.3.tar.gz',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 2.7',
